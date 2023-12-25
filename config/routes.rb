@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'votes/create'
+  get 'votes/delete'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,4 +10,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "posts#index"
+
+  concern :votable do
+    resources :votes
+  end
+
+  resources :posts, concerns: :votable
+  resources :users
 end
+
