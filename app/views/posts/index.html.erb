@@ -1,0 +1,12 @@
+<ol start="<%= @starting_index %>">
+<% @posts.each do |post| %>
+    <li data-short-id="<%= post.to_param %>"><%= render post, locals: { is_detail: false } %> </li>
+<% end %>
+</ol>
+<% if @show_previous_page %>
+  <%= link_to "prev", posts_path(page: @current_page - 1) %>
+<% end %>
+<% if @show_previous_page and @show_next_page %>|<% end %>
+<% if @show_next_page %>
+  <%= link_to "next", posts_path(page: @current_page + 1) %>
+<% end %>

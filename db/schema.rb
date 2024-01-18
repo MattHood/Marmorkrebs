@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_22_053542) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_13_002721) do
+  create_table "comments", force: :cascade do |t|
+    t.integer "author_id", null: false
+    t.integer "post_id", null: false
+    t.integer "parent_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "link"
     t.text "body"
@@ -40,11 +52,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_053542) do
     t.integer "voter_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "type", null: false
+    t.integer "kind", null: false
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
     t.index ["voter_id"], name: "index_votes_on_voter_id"
   end
 
+  add_foreign_key "comments", "comments", column: "parent_id"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "posts", "users", column: "submitter_id"
   add_foreign_key "votes", "users", column: "voter_id"
 end

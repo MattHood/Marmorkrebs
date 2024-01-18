@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "comment_form" do  %>
+  <% if is_submitted %>
+  <div>Submitted</div>
+  <% else %>
+    <%= form_for comment do |f|  %>
+      <%= f.text_area :content, rows: 5 %>
+      <%= f.hidden_field :post_id %>
+      <%= f.submit "Post", disabled: not(signed_in?) %>
+      <%= f.button "Preview" %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -26,9 +26,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "527c7203e7302ca2",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.5.3"
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -155,7 +165,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "669051ec39030b88",
+  "active": "527c7203e7302ca2",
   "lastOpenFiles": [
     "Design.md"
   ]

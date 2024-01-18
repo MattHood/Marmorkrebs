@@ -1,0 +1,18 @@
+<%= turbo_frame_tag comment do %>
+  <div id="<%= dom_id(comment) %>">
+    <%= vote_button comment, :upvote %>
+    <span><%= comment.vote_score %></span>
+    <%= vote_button comment, :downvote %>
+    <span>
+      <%= link_to comment.author.username, comment.author %>&nbsp;
+      <%= time_ago_in_words comment.created_at %>&nbsp;|&nbsp;
+      <%= link_to "link", post_path(comment.post) + "#" + dom_id(comment) %>
+    </span>
+    <p><%= comment.content %></p>
+    <ul>
+      <% comment.comments.each do |child_comment| %>
+        <%= render child_comment %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

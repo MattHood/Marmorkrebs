@@ -71,3 +71,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "sqids", "~> 0.2.0"
+
+gem "pry-rails", "~> 0.3.9"

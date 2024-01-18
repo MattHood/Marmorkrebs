@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'votes/create'
-  get 'votes/delete'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -16,6 +14,8 @@ Rails.application.routes.draw do
   end
 
   resources :posts, concerns: :votable
+  resources :comments, concerns: :votable
   resources :users
+  resources :votes
 end
 

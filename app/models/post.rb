@@ -1,10 +1,11 @@
 class Post < ApplicationRecord
   include Votable
   belongs_to :submitter, class_name: :User
+  has_many :comments
 
   # Lists the most relevant posts
-  def self.hot(limit = 25)
-    Post.all.limit limit
+  def self.hot(page = 1, limit = 25)
+    Post.all.offset(limit * (page - 1)).limit(limit)
   end
 
   # Finds a record by its public identifier
@@ -17,8 +18,6 @@ class Post < ApplicationRecord
   def short_id
     Post.sqids.encode [id]
   end
-
-  def to_param = short_id
 
   private
   def self.sqids = Sqids.new(min_length: 6)
